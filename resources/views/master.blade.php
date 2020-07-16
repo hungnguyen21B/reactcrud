@@ -3,7 +3,7 @@
 
 <head>
     <title>Our Website</title>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -46,7 +46,7 @@
             font-size: 20px;
             font-weight: bold;
             color: sienna;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            /* font-family: Verdana, Geneva, Tahoma, sans-serif !important; */
         }
 
         .container-fluid>.row>.col-sm-4>.list-group>.list-group-item {
@@ -64,7 +64,7 @@
 
         .container-fluid>.row>.col-sm-8>h1 {
             color: sienna;
-            font-family: monospace;
+            /* font-family: monospace; */
         }
         /*----------------------------*/
 
@@ -189,7 +189,7 @@
             text-transform: uppercase;
             margin-top: 25px;
             letter-spacing: 2px;
-            font-family: monospace;
+            /* font-family: monospace; */
         }
 
         .site-footer a {
@@ -342,7 +342,7 @@
             margin: auto;
             text-align: center;
             color:darkred;
-            font-family: cursive;
+            /* font-family: cursive; */
             margin-top: 30px;
             margin-bottom: 10px;
         }
@@ -451,7 +451,7 @@
         }
         /*admin danh muc*/
         .box-content h2{
-            font-family: cursive;
+            /* font-family: cursive; */
             color:white;
 
         }
@@ -462,7 +462,7 @@
         }
         .round a {
             color: crimson;
-            font-family: Helvetica;
+            /* font-family: Helvetica; */
             text-transform: uppercase;
             font-size: 20px;
             text-decoration: none;
@@ -489,7 +489,7 @@
         /*-------------------------------------*/
         .modal-header{
             text-align: center;
-            font-family:sans-serif;
+            /* font-family:sans-serif; */
             background-color:darkred;
             color:white;
         }

@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('index',[
-    'as'=>'trangchu',
-    'uses'=>'PageController@getIndex'
-]);
 Route::get('indexAdmin',[
     'as'=>'trangchuAdmin',
     'uses'=>'PageController@getIndexAdmin'
@@ -37,11 +33,15 @@ Route::post('insert','PageController@insertProduct');
 Route::get('edit/{id}','PageController@editPro');
 Route::post('edit/{id}','PageController@editProduct');
 Route::get('delete/{id}','PageController@deleteProduct');
+
 //hung
 Route::get('index',[
     'as'=>'trangchu',
     'uses'=>'PageController@getIndex'
 ]);
+
+Route::get('ahihi','PageController@getIndex');
+
 Route::post('tim-kiem',[
     'as'=>'search',
     'uses'=>'PageController@getSearch'

@@ -6,10 +6,10 @@ use App\TypeProduct;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 
-class PageController extends Controller
+class AdminController extends Controller
 {
-    public function getIndex(){
-        return view('admin.trangchu');
+    public function getA(){
+        return view('welcome');
     }
     public function getIndexAdmin(){
         $product = Product::all();

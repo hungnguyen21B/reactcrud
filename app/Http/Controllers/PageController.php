@@ -14,6 +14,7 @@ use DB;
 
 class PageController extends Controller
 {
+    
     public function getIndex(){
         $slide=Slide::All();
         $product_types=TypeProduct::All();
@@ -30,6 +31,7 @@ class PageController extends Controller
         return view('page.trangchu')->with(['colors'=>$colors,'product_types'=>$product_types,
         'slide'=>$slide,'new_products'=>$new_products,'products'=>$products]);
     }
+    
     public function getSearch(Request $request){
         $col=$request->color;
         $pri=$request->price;

@@ -11,11 +11,11 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="Image/{{$slide[0]->image}}" alt="" >
+            <img src="../Image/{{$slide[0]->image}}" alt="" >
         </div>
         @for($i = 1; $i<count($slide); $i++)
         <div class="item">
-            <img src="Image/{{$slide[$i]->image}}" alt="" >
+            <img src="./Image/{{$slide[$i]->image}}" alt="" >
         </div>
         @endfor
     </div>
