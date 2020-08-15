@@ -3,7 +3,7 @@
 
 <head>
     <title>Our Website</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -15,12 +15,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        .navbar-default{
+        .body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .navbar-default {
             background-color: mistyrose;
         }
-        .navbar-default>.container-fluid{
+
+        .navbar-default>.container-fluid {
             background-color: mistyrose;
         }
+
         .carousel-inner>.item>img {
             height: 600px;
             width: 100%;
@@ -66,6 +72,7 @@
             color: sienna;
             /* font-family: monospace; */
         }
+
         /*----------------------------*/
 
         .hovereffect {
@@ -162,6 +169,7 @@
             -webkit-transition-delay: 0.3s;
             transition-delay: 0.3s;
         }
+
         /*footer*/
 
         .site-footer {
@@ -170,7 +178,7 @@
             line-height: 24px;
             color: navy;
             position: relative;
-            margin:auto;
+            margin: auto;
         }
 
         .site-footer hr {
@@ -253,6 +261,7 @@
             .site-footer {
                 padding-bottom: 0
             }
+
             .site-footer .copyright-text,
             .site-footer .social-icons {
                 text-align: center
@@ -331,30 +340,34 @@
                 font-weight: 600
             }
         }
+
         /* admin */
-        .container>.row>table{
+        .container>.row>table {
             border-color: darkred;
             text-align: center;
 
         }
-        .container>.row>h1{
+
+        .container>.row>h1 {
             position: relative;
             margin: auto;
             text-align: center;
-            color:darkred;
+            color: darkred;
             /* font-family: cursive; */
             margin-top: 30px;
             margin-bottom: 10px;
         }
-        .container>.row>table>thead{
+
+        .container>.row>table>thead {
             background-color: darkred;
-            color:whitesmoke;
+            color: whitesmoke;
             position: relative;
             margin: auto;
             text-align: center;
         }
-    /*======================================*/
-    #myCarousel {
+
+        /*======================================*/
+        #myCarousel {
             background: #000;
             text-align: center;
             position: relative
@@ -444,22 +457,26 @@
         #myCarousel .icon a:hover {
             background: #fff
         }
-        .welcome{
+
+        .welcome {
             background-color: #000;
-            color:chartreuse;
-            height:80px;
+            color: chartreuse;
+            height: 80px;
         }
+
         /*admin danh muc*/
-        .box-content h2{
+        .box-content h2 {
             /* font-family: cursive; */
-            color:white;
+            color: white;
 
         }
-        .round{
+
+        .round {
             text-align: center;
             margin-top: 80px;
 
         }
+
         .round a {
             color: crimson;
             /* font-family: Helvetica; */
@@ -486,17 +503,20 @@
             color: #fff;
             background-color: crimson;
         }
+
         /*-------------------------------------*/
-        .modal-header{
+        .modal-header {
             text-align: center;
             /* font-family:sans-serif; */
-            background-color:darkred;
-            color:white;
+            background-color: darkred;
+            color: white;
         }
-        .modal-footer{
+
+        .modal-footer {
             text-align: center;
         }
-        .modal-footer button{
+
+        .modal-footer button {
             height: 32px;
             padding: 0 15px;
             font-size: 14px;
@@ -507,20 +527,21 @@
             border-radius: 4px;
             transition: all 0.2s ease-in-out;
         }
-        .modal-footer button:hover{
+
+        .modal-footer button:hover {
             box-shadow: 1px 1px crimson, 2px 2px red, 3px 3px maroon;
             transform: translateX(-3px);
         }
-
     </style>
 </head>
 
 <body>
     @include('header')
     <div class="rev-slider">
-         @yield('content')
+        @yield('content')
     </div>
     <!-- slider -->
     @include('footer');
 </body>
+
 </html>

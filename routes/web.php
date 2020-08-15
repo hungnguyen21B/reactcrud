@@ -14,52 +14,96 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('page.notFound');
 });
+//*************************ROUTES ADMIN*****************************//
 Route::get('indexAdmin',[
     'as'=>'trangchuAdmin',
-    'uses'=>'PageController@getIndexAdmin'
+    'uses'=>'AdminController@getIndexAdmin'
 ]);
-Route::get('producManagement',[
-    'as'=>'Pro_management',
-    'uses'=>'PageController@getProductManagement'
+Route::get('OrderManagement',[
+    'as'=>'orderManagement',
+    'uses'=>'AdminController@getOrder'
 ]);
-Route::get('customerManagement',[
-    'as'=>'Cus_management',
-    'uses'=>'PageController@getCustomerManagement'
+Route::get('DailyChart',[
+    'as'=>'dailyChart',
+    'uses'=>'AdminController@getDailyChart'
 ]);
-Route::get('insert','PageController@insert');
-Route::post('insert','PageController@insertProduct');
-Route::get('edit/{id}','PageController@editPro');
-Route::post('edit/{id}','PageController@editProduct');
-Route::get('delete/{id}','PageController@deleteProduct');
+Route::post('DailyChart',[
+    'as'=>'dailyChart',
+    'uses'=>'AdminController@postDailyChart'
+]);
+Route::get('MonthlyChart',[
+    'as'=>'monthlyChart',
+    'uses'=>'AdminController@getMonthlyChart'
+]);
+Route::get('insert','AdminController@insert');
+Route::post('insert','AdminController@insertProduct');
+Route::get('edit/{id}','AdminController@editPro');
+Route::post('edit/{id}','AdminController@editProduct');
+Route::get('delete/{id}','AdminController@deleteProduct');
+Route::get('viewDetail/{id}','AdminController@viewDetail');
+//*****************************************************************//
 
 //hung
-Route::get('index',[
-    'as'=>'trangchu',
-    'uses'=>'PageController@getIndex'
+Route::get('lien-he', [
+    'as' => 'contact',
+    'uses' => 'PageController@getContact'
 ]);
-
-Route::get('ahihi','PageController@getIndex');
-
-Route::post('tim-kiem',[
-    'as'=>'search',
-    'uses'=>'PageController@getSearch'
+Route::get('index', [
+    'as' => 'trangchu',
+    'uses' => 'PageController@getIndex'
+]);
+//cart-hung
+Route::get('gio-hang', [
+    'as' => 'getCart',
+    'uses' => 'CartController@getCart'
+]);
+Route::get('them-vao-tui/{id}', [
+    'as' => 'addCart',
+    'uses' => 'CartController@addCart'
+]);
+Route::post('tim-kiem', [
+    'as' => 'search',
+    'uses' => 'PageController@getSearch'
+]);
+Route::get('them-so-luong/{id}', [
+    'as' => 'addQuantity',
+    'uses' => 'CartController@addQuantity'
+]);
+Route::get('giam-so-luong/{id}', [
+    'as' => 'minusQuantity',
+    'uses' => 'CartController@minusQuantity'
+]);
+//ceckout hung
+Route::post('thanh-toan', [
+    'as' => 'checkout',
+    'uses' => 'CartController@checkout'
+]);
+//logout
+Route::get('log-out', [
+    'as' => 'logout',
+    'uses' => 'PageController@getLogout'
 ]);
 //mai
-Route::get('register',[
-    'as'=>'signup',
-    'uses'=>'PageController@getSignup'
+Route::get('register', [
+    'as' => 'signup',
+    'uses' => 'PageController@getSignup'
 ]);
-Route::post('register',[
-    'as'=>'signup',
-    'uses'=>'PageController@postSignup'
+Route::post('register', [
+    'as' => 'signup',
+    'uses' => 'PageController@postSignup'
 ]);
-Route::get('login',[
-    'as'=>'signin',
-    'uses'=>'PageController@getLogin'
+Route::get('login', [
+    'as' => 'signin',
+    'uses' => 'PageController@getLogin'
 ]);
-Route::post('login',[
-    'as'=>'signin',
-    'uses'=>'PageController@postLogin'
+Route::post('login', [
+    'as' => 'signin',
+    'uses' => 'PageController@postLogin'
 ]);
+Route::get('detail-product/{id}', [
+    'as'=> 'detail',
+    'uses' => 'PageController@getDetail'
+]
+);
