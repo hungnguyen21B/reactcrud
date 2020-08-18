@@ -32,8 +32,8 @@ class AdminController extends Controller
         join('products', BillDetail::raw('id_pro'),'=','products.id')
         ->join('bills', BillDetail::raw('id_bill'), '=', 'bills.id')   
         ->groupBy('id_pro',Product::raw('name'))  
-        ->select(Product::raw('name'),BillDetail::raw('SUM(quantity) as total_quantity'))
-        ->Where(BillDetail::raw('date'),'=',$date)->get();
+        ->select(Product::raw('name'),BillDetail::raw('SUM(quantity_pro) as total_quantity'))
+        ->Where(Bill::raw('date'),'=',$date)->get();
         return view('PageAdmin.statisticDaily',compact('date','total_quantity'));
     }
     public function postDailyChart(Request $req){
@@ -46,8 +46,8 @@ class AdminController extends Controller
         join('products', BillDetail::raw('id_pro'),'=','products.id')
         ->join('bills', BillDetail::raw('id_bill'), '=', 'bills.id')   
         ->groupBy('id_pro',Product::raw('name'))  
-        ->select(Product::raw('name'),BillDetail::raw('SUM(quantity) as total_quantity'))
-        ->Where(BillDetail::raw('date'),'=',$date)->get();
+        ->select(Product::raw('name'),BillDetail::raw('SUM(quantity_pro) as total_quantity'))
+        ->Where(Bill::raw('date'),'=',$date)->get();
         return view('PageAdmin.statisticDaily',compact('date','total_quantity'));
     }
     
@@ -56,7 +56,7 @@ class AdminController extends Controller
         $orderDetails=BillDetail::all();
         $pro_month=BillDetail::
         join('bills', BillDetail::raw('id_bill'), '=', 'bills.id')
-        ->select(Bill::raw('MONTH(date) as month'),BillDetail::raw('SUM(quantity) as sum'))
+        ->select(Bill::raw('MONTH(date) as month'),BillDetail::raw('SUM(quantity_pro) as sum'))
         ->groupBy('month')->get();   
         return view('PageAdmin.statisticMonthly',compact('pro_month'));
     } 
@@ -99,8 +99,11 @@ class AdminController extends Controller
         $products = Product::find($id);
         $products->name =  $request->input('tensanpham');
         $products->description = $request->input('mota');
-        $products->unit_price = $request->input('gia');
-        $products->promotion_price = null;
+        if($products->unit_price!=$request->input('gia')){
+            $products->promotion_price = $request->input('gia');
+        }else{
+            $products->unit_price = $request->input('gia');
+        }
         if ($request->hasFile('hinhanh')){
             $file=$request->file('hinhanh');
             $fileName=$file->getClientOriginalName('hinhanh');

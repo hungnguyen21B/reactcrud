@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
+use App\Mail\EmailCheckout;
 use App\Cart;
+use App\Color;
 use App\Size;
+use App\OrderMail;
 use App\Bill;
 use App\BillDetail;
 use App\Customer;
@@ -14,7 +15,7 @@ use App\Product;
 use DB;
 use Session;
 use Carbon\Carbon;
-
+use App\SizeProduct;
 class CartController extends Controller
 {
     //
@@ -171,9 +172,10 @@ class CartController extends Controller
         $id_Cus = Session::get('login');
         $carts = $this->getCartOfUser($carts, $id_Cus);
         if (count($carts) > 0) {
+            $orderMail=[];
             $cus = new Customer();
             $cus->name = $Request->name;
-            $cus->phone = $Request->phone;
+            $cus->phone_number = $Request->phone;
             $cus->email = $Request->email;
             $cus->gender = $Request->gender;
             $cus->address = $Request->address;
@@ -189,17 +191,25 @@ class CartController extends Controller
             $bill->save();
             foreach ($carts as $cart) {
                 $bill_detail = new BillDetail();
-                $product = Product::find($cart->id_Pro);
-                $price = ($product->promotion_price != null) ? $product->unit_price : $product->promotion_price;
-                $bill_detail->total_price = $price * $cart->quantity * 4;
-                $bill_detail->quantity = $cart->quantity;
+                $bill_detail->quantity_pro = $cart->quantity;
                 $bill_detail->id_bill = $bill->id;
                 $bill_detail->rental_time = $cart->rental_time;
-                //4 ngay
                 $bill_detail->id_pro = $cart->id_Pro;
+                if($cart->id_size==0){
+                    $getFirstSizeOfProduct = SizeProduct::where('id_pro',$cart->id_Pro)->first();
+                    $cart->id_size= $getFirstSizeOfProduct->id_size;
+                }
+                $bill_detail->id_size= $cart->id_size;
                 $bill_detail->save();
+                $product= Product::find($bill_detail->id_pro);
+                $color = Color::find($product->id_color);
+                $size= Size::find($cart->id_size);
+                echo $size;
+                array_push($orderMail, new OrderMail($product->name, ($product->promotion_price)?$product->promotion_price:$product->unit_price, $cart->quantity,$color->name, $size->name));
             }
+            \Mail::to($cus->email)->send(new EmailCheckout($orderMail,$cus->name,$bill->total_price));
             Session::put('cart', $this->removeCartOfUser($carts, $id_Cus));
+            Session::flash('alert-success', $Request->name.' đã chốt đơn.');
             return redirect()->route('trangchu');
         } else {
             return redirect()->route('trangchu');

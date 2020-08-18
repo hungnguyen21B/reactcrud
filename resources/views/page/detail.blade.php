@@ -30,8 +30,8 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <h1>{!! $product->name !!}</h1>
-                    <h5>Price: {!! ($product->promotion_price)?$product->promotion_price:$product->unit_price !!}</h5>
+                    <h1>{{ $product->name }}</h1>
+                    <h5>Price: {{ ($product->promotion_price)?$product->promotion_price:$product->unit_price }}</h5>
                     <label><h5>Number of days hired</h5> </label>
                     <select>
                     <option>2 days</option>
@@ -46,7 +46,7 @@
                     </p>
                     <div class="number-input md-number-input">
                         <button><i class="fa fa-minus"></i></button>
-                        <input class="quantity" min="0" name="quantity" value="1" type="number">
+                        <input class="quantity" min="0" name="quantity" value="{{$product->id}}" type="number" readonly>
                         <button><i class="fa fa-plus"></i></button>
                         <a class="info" href="{{route('addCart',$product->id)}}"><button><i class="fa fa-shopping-cart"></i>Add to cart</button></a>
                     </div>
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                @while ($run1<=count($allPros)-3) 
+                @while ($run1<count($allPros)-3) 
                 <?php
                 $run2 = $run1 + 3;
                 ?> 
@@ -140,5 +140,6 @@
             </div>
 </div>     
 </div>
+
 </body>
 </html>

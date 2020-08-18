@@ -15,6 +15,11 @@ class CreateBillDetailsTable extends Migration
     {
         Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_bill')->references('id')->on('bills');
+            $table->foreignId('id_size')->references('id')->on('sizes');
+            $table->foreignId('id_pro')->references('id')->on('products');
+            $table->integer('quantity_pro');
+            $table->integer('rental_time');
             $table->timestamps();
         });
     }

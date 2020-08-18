@@ -33,7 +33,7 @@ class PageController extends Controller
         // echo $colors;
         // echo $slide;
         $new_products = Product::where('new', 1)->paginate(6);
-        $products = DB::table('products')->where('promotion_price', '<>', 0)->get();
+        $products = DB::table('products')->where('new', 0)->get();
         return view('page.trangchu')->with([
             'colors' => $colors, 'product_types' => $product_types,
             'slide' => $slide, 'new_products' => $new_products, 'products' => $products
@@ -197,7 +197,8 @@ class PageController extends Controller
     }
     public function getDetail($id){
         $product=Product::find($id);
-        $allPros=Product::where('id_type',$product->id_type)->get();
+        $allPros=Product::where('id_type',$product->id_type)
+        ->where('id','<>',$id)->get();
         // echo json_encode($allPros);
        return view('page.detail')->with(['product'=> $product, 'allPros'=>$allPros]);
     }

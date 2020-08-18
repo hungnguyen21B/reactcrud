@@ -80,7 +80,7 @@
                           <td>{!! $product["name"] !!}</td>
                           <td><img src="{{asset('Image/Product/'.$product->image)}}" alt="" width="40" height="40"/></td>
                           <td>{!! $product["description"] !!}</td>
-                          <td>{!! $product["unit_price"] !!}</td>
+                          <td>{!! ($product["promotion_price"])?$product["promotion_price"]:$product["unit_price"] !!}</td>
                           <td>
                             @foreach($color_products as $color)
                                 @if($product["id_color"] == $color["id"])
