@@ -32,11 +32,12 @@
 <div class="container-fluid">
     <!-- left -->
     <div class="row">
-        <form class="col-sm-4">
-            <h1>Bá»˜ Lá»ŒC</h1>
+    <form action="{{route ('search') }}" class="col-sm-4" method="post">
+            @csrf
+            <h1>CATEGORIES</h1>
             <br>
             <ul class="list-group">
-                <li class="list-group-item">KIá»‚U DÃNG
+                <li class="list-group-item">TYPES
                     <hr />
                     @foreach($product_types as $item)
                     <div class="form-check">
@@ -46,7 +47,7 @@
                     </div>
                     @endforeach
                 </li>
-                <li class="list-group-item">MÃ€U Sáº®C
+                <li class="list-group-item">COLORS
                     <hr />
                     @foreach($colors as $item)
                     <div class="form-check">
@@ -57,35 +58,35 @@
                     @endforeach
 
                 </li>
-                <li class="list-group-item">GIÃ
+                <li class="list-group-item">PRICE
                     <hr />
                     <div class="form-check">
                         <label class="form-check-label" for="radio1">
-                            <input type="radio" class="form-check-input" id="radio1" name="price" value="500"> DÆ°á»›i 500.000 VND
+                            <input type="radio" class="form-check-input" id="radio1" name="price" value="500"> Under 500.000 VND
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label" for="radio2">
-                            <input type="radio" class="form-check-input" id="radio2" name="price" value="1000"> Tá»« 500.000 Ä‘áº¿n 1.000.000 VND
+                            <input type="radio" class="form-check-input" id="radio2" name="price" value="1000"> From 500.000 To 1.000.000 VND
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label" for="radio2">
-                            <input type="radio" class="form-check-input" id="radio3" name="price" value="2000"> Tá»« 1.000.000 Ä‘áº¿n 2.000.000 VND
+                            <input type="radio" class="form-check-input" id="radio3" name="price" value="2000"> From 1.000.000 To 2.000.000 VND
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label" for="radio2">
-                            <input type="radio" class="form-check-input" id="radio4" name="price" value="5000"> Tá»« 2.000.000 Ä‘áº¿n 5.000.000 VND
+                            <input type="radio" class="form-check-input" id="radio4" name="price" value="5000"> From 2.000.000 To 5.000.000 VND
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label" for="radio2">
-                            <input type="radio" class="form-check-input" id="radio5" name="price" value="6000"> TrÃªn 5.000.000 VND
+                            <input type="radio" class="form-check-input" id="radio5" name="price" value="6000"> Over 5.000.000 VND
                         </label>
                     </div>
                 </li>
-                <li class="list-group-item"><button class="btn btn-primary">Lá»c</button></li>
+                <li class="list-group-item"><button class="btn btn-primary">Filter products</button></li>
             </ul>
 
         </form>
@@ -102,11 +103,11 @@
                         <img class="img-responsive" src="Image/Product/{{$item->image}}" alt="">
                         <div class="overlay">
                             <h2>{{$item->name}}</h2>
-                            <a class="info" href="#">Chi tiáº¿t</a>
+                            <a class="info" href="{{route('detail',$item->id)}}">Detail</a>
                             @if(Session::has('login')&&Session::get('login')!=false)
-                            <a class="info" href="{{route('addCart',$item->id)}}">Add Cart ok</a>
+                            <a class="info" href="{{route('addCart',$item->id)}}">Add to Cart</a>
                             @else
-                            <a class="info" onclick="haveNotLogin()">Add Cart</a>
+                            <a class="info" onclick="haveNotLogin()">Add to Cart</a>
                             @endif
                         </div>
                     </div>

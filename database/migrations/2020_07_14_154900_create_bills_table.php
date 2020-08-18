@@ -15,6 +15,11 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_cus')->references('id')->on('customers');
+            $table->date('date');
+            $table->double('total_price');
+            $table->String('payment');
+            $table->String('note');
             $table->timestamps();
         });
     }

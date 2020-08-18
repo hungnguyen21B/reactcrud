@@ -62,7 +62,7 @@
 <div class="container register-form">
             <div class="form">
                 <div class="note">
-                    <h2> SỬA THÔNG TIN SẢN PHẨM</h2>
+                    <h2>EDIT PRODUCT INFORMATION</h2>
                 </div>
                 <form action="" method="post" enctype="multipart/form-data">
                     @csrf
@@ -73,59 +73,59 @@
                     <div class="modal-body mx-3">
 
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Tên sản phẩm</label>
+                            <label for="inputName" class="col-sm-4 col-form-label">Product name</label>
                             <div class="col-sm-8">
                               <input type="text" class="form-control" name="tensanpham" id="inputName" value="{{ $product["name"] }}" placeholder="Tên sản phẩm">
                             </div>
                           </div>
 
                           <div class="form-group row">
-                            <label for="inputDescription" class="col-sm-4 col-form-label">Mô tả</label>
+                            <label for="inputDescription" class="col-sm-4 col-form-label">Description</label>
                             <div class="col-sm-8">
                               <input type="text" class="form-control" name="mota" id="inputDescription" value="{{ $product["description"] }}" placeholder="Mô tả">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputPrice" class="col-sm-4 col-form-label">Giá</label>
+                            <label for="inputPrice" class="col-sm-4 col-form-label">Price</label>
                             <div class="col-sm-8">
                               <input type="number" class="form-control" name="gia" value="{{ $product["unit_price"] }}" placeholder="Giá">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputColor" class="col-sm-4 col-form-label">Màu sắc</label>
+                            <label for="inputColor" class="col-sm-4 col-form-label">Color</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="mausac" >
                                   @for($i=1;$i<7;$i++)
                                     @if($i==$product->id_color)
                                     <option value="{{$i}}" selected>
                                       @if($i==1)
-                                      Be Nhạt
+                                      Light Beige
                                       @elseif ($i==2)
-                                      Đỏ
+                                      Red
                                       @elseif ($i==3)
-                                      Hồng Pastel
+                                      Pastel Pink
                                       @elseif ($i==4)
-                                      Trắng
+                                      White
                                       @elseif ($i==5)
-                                      Xám
+                                      Gray
                                       @elseif ($i==6)
-                                      Xanh
+                                      Blue
                                       @endif
                                     </option>
                                     @else
                                     <option value="{{$i}}">
                                       @if($i==1)
-                                      Be Nhạt
+                                      Light Beige
                                       @elseif ($i==2)
-                                      Đỏ
+                                      Red
                                       @elseif ($i==3)
-                                      Hồng Pastel
+                                      Pastel Pink
                                       @elseif ($i==4)
-                                      Trắng
+                                      White
                                       @elseif ($i==5)
-                                      Xám
+                                      Gray
                                       @elseif ($i==6)
-                                      Xanh
+                                      Blue
                                       @endif
                                     </option>
                                     @endif
@@ -135,36 +135,36 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputType" class="col-sm-4 col-form-label">Kiểu dáng</label>
+                            <label for="inputType" class="col-sm-4 col-form-label">Type</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="loai" id="types">
                                 @for($i=1;$i<6;$i++)
                                     @if($i==$product->id_type)
                                     <option value="{{$i}}" selected>
                                       @if($i==1)
-                                      Chữ A (A-Line)
+                                      A-Line
                                       @elseif ($i==2)
-                                      Dáng Phồng (Ball Grown)
+                                      Ball Grown
                                       @elseif ($i==3)
-                                      Đuôi Cá (Mermaid)
+                                     Mermaid
                                       @elseif ($i==4)
-                                      Hạ Eo (Drop Waist)
+                                     Drop Waist
                                       @elseif ($i==5)
-                                      Ôm Suôn (Column)
+                                     Column
                                       @endif
                                     </option>
                                     @else
                                     <option value="{{$i}}">
                                     @if($i==1)
-                                      Chữ A (A-Line)
+                                      A-Line
                                       @elseif ($i==2)
-                                      Dáng Phồng (Ball Grown)
+                                      Ball Grown
                                       @elseif ($i==3)
-                                      Đuôi Cá (Mermaid)
+                                     Mermaid
                                       @elseif ($i==4)
-                                      Hạ Eo (Drop Waist)
+                                    Drop Waist
                                       @elseif ($i==5)
-                                      Ôm Suôn (Column)
+                                      Column
                                       @endif
                                     </option>
                                     @endif
@@ -174,7 +174,7 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputImage" class="col-sm-4 col-form-label">Hình ảnh</label>
+                            <label for="inputImage" class="col-sm-4 col-form-label">Image</label>
                             <div class="col-sm-8">
                             <img src="{{asset('Image/Product/'.$product->image)}}" alt="" width="40" height="40"/>
                               <input type="file" class="form-control-file" name="hinhanh"  value="{{ $product["image"] }}">

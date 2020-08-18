@@ -67,6 +67,10 @@ Route::post('tim-kiem', [
     'as' => 'search',
     'uses' => 'PageController@getSearch'
 ]);
+Route::post('save-size-rental/{id}', [
+    'as' => 'saveSizeRental',
+    'uses' => 'CartController@saveSizeRental'
+]);
 Route::get('them-so-luong/{id}', [
     'as' => 'addQuantity',
     'uses' => 'CartController@addQuantity'
@@ -74,6 +78,11 @@ Route::get('them-so-luong/{id}', [
 Route::get('giam-so-luong/{id}', [
     'as' => 'minusQuantity',
     'uses' => 'CartController@minusQuantity'
+]);
+//removeCartOfUser
+Route::get('remove-cart/{id}', [
+    'as' => 'removeCart',
+    'uses' => 'CartController@removeCart'
 ]);
 //ceckout hung
 Route::post('thanh-toan', [

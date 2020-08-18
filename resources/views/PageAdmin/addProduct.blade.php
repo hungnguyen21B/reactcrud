@@ -63,7 +63,7 @@
 <div class="container register-form">
             <div class="form">
                 <div class="note">
-                    <h2> THÊM SẢN PHẨM</h2>
+                    <h2> ADD PRODUCT</h2>
                 </div>
                 <form action="" method="post" enctype="multipart/form-data">
                     @csrf
@@ -74,51 +74,51 @@
                     <div class="modal-body mx-3">
 
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Tên sản phẩm</label>
+                            <label for="inputName" class="col-sm-4 col-form-label">Product name</label>
                             <div class="col-sm-8">
                               <input type="text" class="form-control" name="tensanpham" id="inputName"  placeholder="Tên sản phẩm">
                             </div>
                           </div>
 
                           <div class="form-group row">
-                            <label for="inputDescription" class="col-sm-4 col-form-label">Mô tả</label>
+                            <label for="inputDescription" class="col-sm-4 col-form-label">Description</label>
                             <div class="col-sm-8">
                               <input type="text" class="form-control" name="mota" id="inputDescription" placeholder="Mô tả">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputPrice" class="col-sm-4 col-form-label">Giá</label>
+                            <label for="inputPrice" class="col-sm-4 col-form-label">Price</label>
                             <div class="col-sm-8">
                               <input type="number" class="form-control" name="gia" placeholder="Giá">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputColor" class="col-sm-4 col-form-label">Màu sắc</label>
+                            <label for="inputColor" class="col-sm-4 col-form-label">Color</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="mausac" >
-                                    <option value="1">Be Nhạt</option>
-                                    <option value="2">Đỏ</option>
-                                    <option value="3">Hồng Pastel</option>
-                                    <option value="4">Trắng</option>
-                                    <option value="5">Xám</option>
-                                    <option value="6">Xanh</option>
+                                    <option value="1">Light Beige</option>
+                                    <option value="2">Red</option>
+                                    <option value="3">Pastel Pink</option>
+                                    <option value="4">White</option>
+                                    <option value="5">Gray</option>
+                                    <option value="6">Blue</option>
                                   </select>
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputType" class="col-sm-4 col-form-label">Kiểu dáng</label>
+                            <label for="inputType" class="col-sm-4 col-form-label">Type</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="loai" id="types">
-                                    <option value="1">Chữ A (A-Line)</option>
-                                    <option value="2">Dáng Phồng (Ball Grown)</option>
-                                    <option value="3">Đuôi Cá (Mermaid)</option>
-                                    <option value="4">Hạ Eo (Drop Waist)</option>
-                                    <option value="5">Ôm Suôn (Column)</option>
+                                    <option value="1">A-Line</option>
+                                    <option value="2">Ball Grown</option>
+                                    <option value="3">Mermaid</option>
+                                    <option value="4">Drop Waist</option>
+                                    <option value="5">Column</option>
                                   </select>
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputImage" class="col-sm-4 col-form-label">Hình ảnh</label>
+                            <label for="inputImage" class="col-sm-4 col-form-label">Picture</label>
                             <div class="col-sm-8">
                                 <input type="file" name="hinhanh" class="form-control-file" >
                             </div>

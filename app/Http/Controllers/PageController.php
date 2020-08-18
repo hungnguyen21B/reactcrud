@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mail\EmailRegister;
 use Hash;
 use Auth;
+use Mail;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
@@ -104,8 +105,9 @@ class PageController extends Controller
                     ->paginate(9);
                 // echo (json_encode($products));
             }
-            if (!$products) {
-                return view('page.notFound');
+            if (count($products) < 1) {
+                Session::flash('alert-danger', 'Not found any products');
+                return redirect('index');
             } else {
                 return view('page.search')->with([
                     'colors' => $colors, 'product_types' => $product_types,
@@ -137,8 +139,9 @@ class PageController extends Controller
                 ->orWhere('product_types.name', 'like', '%' . $search . '%')
                 ->orWhere('products.name', 'like', '%' . $search . '%')
                 ->paginate(9);
-            if (!$products) {
-                return view('page.notFound');
+            if (count($products) < 1) {
+                Session::flash('alert-danger', 'Not found any products');
+                return redirect('index');
             } else {
                 return view('page.search')->with([
                     'colors' => $colors, 'product_types' => $product_types,
@@ -160,6 +163,7 @@ class PageController extends Controller
         $users->role = 'user';
         $users->password = Hash::make($Request->password);
         $users->save();
+        \Mail::to($users->email)->send(new EmailRegister($Request->name));
         return redirect('login')->with('message', 'Register successfully');
     }
     public function getLogin()

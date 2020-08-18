@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
-use Auth;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
@@ -14,8 +11,6 @@ use App\Bill;
 use App\BillDetail;
 use App\Customer;
 use App\Product;
-
-use App\TypeProduct;
 use DB;
 use Session;
 use Carbon\Carbon;
@@ -25,17 +20,18 @@ class CartController extends Controller
     //
     public function getCart()
     {
-        if (!Session('login')) {
-            echo ('<script>alert("Ban can dang nhap");</script>');
-            return redirect()->back();
-        } else {
-            $products = [];
-            $sizes = [];
-            $totalPrice=0;
-            $id_Cus = Session::get('login');
-            $carts = Session('cart') ? Session::get('cart') : [];
-            $carts= $this->getCartOfUser($carts,$id_Cus);
-            for ($i = 0; $i < count($carts); $i++) {
+        $id_Cus = Session::get('login');
+        $carts = Session('cart') ? Session::get('cart') : [];
+        $carts = $this->getCartOfUser($carts, $id_Cus);
+        if (Session::has('cart') && count($carts) > 0) {
+            if (!Session('login')) {
+                echo ('<script>alert("Ban can dang nhap");</script>');
+                return redirect()->back();
+            } else {
+                $products = [];
+                $sizes = [];
+                $totalPrice = 0;
+                for ($i = 0; $i < count($carts); $i++) {
                     // query
                     //select `product_sizes`.`id_pro`, `product_sizes`.`id_size`, `sizes`.`name` 
                     //from `product_sizes` ,`sizes` where 
@@ -51,23 +47,72 @@ class CartController extends Controller
                     $product = Product::find($carts[$i]->id_Pro);
                     if ($product) {
                         $product->quantity = $carts[$i]->quantity;
-                        $totalPrice+=($product->promotion_price!=0)?$product->promotion_price*$product->quantity:$product->unit_price*$product->quantity;
-                        array_push($products,$product);
+                        $totalPrice += ($product->promotion_price != 0) ? $product->promotion_price * $product->quantity : $product->unit_price * $product->quantity;
+                        array_push($products, $product);
                     }
                     if ($size) {
                         array_push($sizes, $size);
                     }
+                }
+                // echo (json_encode($sizes));
+                return view('page.cart')->with(['products' => $products, 'sizes' => $sizes, 'totalPrice' => $totalPrice, 'carts' => $carts]);
             }
-            // echo (json_encode($sizes));
-            return view('page.cart')->with(['products' => $products, 'sizes' => $sizes,'totalPrice'=>$totalPrice]);
+        } else {
+            Session::flash('alert-danger', 'Cart have no products');
+            return redirect()->back();
         }
     }
-
-    function checkExist($carts, $id_Cus, $id_Pro,$status)
+    public function saveSizeRental(Request $request, $id)
+    {
+        $id_Cus = Session::get('login');
+        $carts = Session('cart') ? Session::get('cart') : [];
+        for ($i = 0; $i < count($carts); $i++) {
+            if ($carts[$i]->id_Cus == $id_Cus && $id == $carts[$i]->id_Pro) {
+                $carts[$i]->id_size = $request->sizes;
+                $carts[$i]->rental_time = $request->days;
+                break;
+            }
+        }
+        Session::put('cart', $carts);
+        Session::flash('alert-success', 'Save successfully');
+        return  redirect()->back();
+    }
+    public function removeCart($id)
+    {
+        $id_Cus = Session::get('login');
+        $carts = Session('cart') ? Session::get('cart') : [];
+        for ($i = 0; $i < count($carts); $i++) {
+            if ($carts[$i]->id_Cus == $id_Cus && $id == $carts[$i]->id_Pro) {
+                array_splice($carts, $i, 1);
+                //  break;
+            }
+        }
+        Session::put('cart', $carts);
+        if (count(Session::get('cart')) > 0) {
+            Session::flash('alert-success', 'Removed a product successful!');
+            return redirect()->back();
+        } else {
+            return  redirect('index');
+        }
+    }
+    function checkExist($carts, $id_Cus, $id_Pro, $status)
     {
         for ($i = 0; $i < count($carts); $i++) {
             if ($carts[$i]->id_Cus == $id_Cus && $carts[$i]->id_Pro == $id_Pro) {
-                ($status=="add")?$carts[$i]->quantity++:$carts[$i]->quantity--;
+                if($status == "add"){
+                    $product= Product::find($carts[$i]->id_Pro);
+                    if ($carts[$i]->quantity == $product->quantity) {
+                        Session::flash('alert-success', 'Sold out');
+                    }else{
+                         $carts[$i]->quantity++;
+                        }
+                }else{
+                    if ($carts[$i]->quantity == 1) {
+                        array_splice($carts, $i, 1);
+                    }else{
+                        $carts[$i]->quantity--;
+                        }
+                }
                 return $carts;
             }
         }
@@ -79,9 +124,9 @@ class CartController extends Controller
             echo ('<script>alert("Ban can dang nhap");</script>');
         } else {
             $carts = Session('cart') ? Session::get('cart') : [];
-            $check = $this->checkExist($carts, Session::get('login'), $id,"add");
+            $check = $this->checkExist($carts, Session::get('login'), $id, "add");
             if (!$check) {
-                array_push($carts, new Cart(Session::get('login'), $id, 1));
+                array_push($carts, new Cart(Session::get('login'), $id, 1, 2));
             } else {
                 $carts = $check;
             }
@@ -98,7 +143,7 @@ class CartController extends Controller
             echo ('<script>alert("Ban can dang nhap");</script>');
         } else {
             $carts = Session('cart') ? Session::get('cart') : [];
-            $carts = $this->checkExist($carts, Session::get('login'), $id,"add");
+            $carts = $this->checkExist($carts, Session::get('login'), $id, "add");
             Session::put('cart', $carts);
         }
         return redirect()->back();
@@ -109,18 +154,26 @@ class CartController extends Controller
             echo ('<script>alert("Ban can dang nhap");</script>');
         } else {
             $carts = Session('cart') ? Session::get('cart') : [];
-            $carts = $this->checkExist($carts, Session::get('login'), $id,"minus");
+            $carts = $this->checkExist($carts, Session::get('login'), $id, "minus");
             Session::put('cart', $carts);
         }
-        return redirect()->back();
+        if(count($this->getCartOfUser($carts, Session::get('login'))) > 0){
+            return redirect()->back();
+        }else{
+            Session::flash('alert-info', 'You have just removed your last product');
+            return redirect('index');
+        }
+        
     }
-    public function checkout(Request $Request){
+    public function checkout(Request $Request)
+    {
         $carts = Session('cart') ? Session::get('cart') : [];
-        $id_Cus=Session::get('login');
-        $carts= $this->getCartOfUser($carts,$id_Cus);
-        if(count($carts)>0){
+        $id_Cus = Session::get('login');
+        $carts = $this->getCartOfUser($carts, $id_Cus);
+        if (count($carts) > 0) {
             $cus = new Customer();
             $cus->name = $Request->name;
+            $cus->phone = $Request->phone;
             $cus->email = $Request->email;
             $cus->gender = $Request->gender;
             $cus->address = $Request->address;
@@ -134,39 +187,40 @@ class CartController extends Controller
             $bill->payment = $Request->payment;
             $bill->note = $Request->note;
             $bill->save();
-            foreach($carts as $cart){
+            foreach ($carts as $cart) {
                 $bill_detail = new BillDetail();
-                $product=Product::find($cart->id_Pro);
-                $price=($product->promotion_price!=null)?$product->unit_price:$product->promotion_price;
-                $bill_detail->total_price=$price*$cart->quantity*4;
-                $bill_detail->quantity=$cart->quantity;
-                $bill_detail->id_bill=$bill->id;
-                $bill_detail->rental_time=4;
+                $product = Product::find($cart->id_Pro);
+                $price = ($product->promotion_price != null) ? $product->unit_price : $product->promotion_price;
+                $bill_detail->total_price = $price * $cart->quantity * 4;
+                $bill_detail->quantity = $cart->quantity;
+                $bill_detail->id_bill = $bill->id;
+                $bill_detail->rental_time = $cart->rental_time;
                 //4 ngay
-                $bill_detail->id_pro=$cart->id_Pro;
+                $bill_detail->id_pro = $cart->id_Pro;
                 $bill_detail->save();
             }
-            Session::put('cart', $this->removeCartOfUser($carts,$id_Cus));
+            Session::put('cart', $this->removeCartOfUser($carts, $id_Cus));
             return redirect()->route('trangchu');
-        }
-        else{
+        } else {
             return redirect()->route('trangchu');
         }
     }
-    public function getCartOfUser($carts,$id_Cus){
+    public function getCartOfUser($carts, $id_Cus)
+    {
         $arr = [];
-        foreach ($carts as $cart){
-            if ($cart->id_Cus==$id_Cus){
-                array_push($arr,$cart);
+        foreach ($carts as $cart) {
+            if ($cart->id_Cus == $id_Cus) {
+                array_push($arr, $cart);
             }
         }
         return $arr;
     }
-    public function removeCartOfUser($carts,$id_Cus){
+    public function removeCartOfUser($carts, $id_Cus)
+    {
         $arr = [];
-        foreach ($carts as $cart){
-            if ($cart->id_Cus!=$id_Cus){
-                array_push($arr,$cart);
+        foreach ($carts as $cart) {
+            if ($cart->id_Cus != $id_Cus) {
+                array_push($arr, $cart);
             }
         }
         return $arr;

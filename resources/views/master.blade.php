@@ -14,11 +14,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   
     <style>
+
         .body {
             font-family: 'Times New Roman', Times, serif;
         }
-
+        input,button{
+            outline: none;
+        }
         .navbar-default {
             background-color: mistyrose;
         }
@@ -113,7 +117,17 @@
             position: relative;
             height: 280px;
         }
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
 
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
         .hovereffect h2 {
             text-transform: uppercase;
             color: #fff;

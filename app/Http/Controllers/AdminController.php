@@ -82,11 +82,6 @@ class AdminController extends Controller
         }else{
             $products->image="1.jpg";
         }
-        // $products->image=$request->input('hinhanh');
-        // $products->image=$request->file('hinhanh');
-        // $file_name=$request->file('hinhanh')->getClientOriginalName();
-        // $products->image="public/Image/Product/".$file_name;
-        // $request->file('hinhanh')->move('public/Image/Product/',$file_name);
         $products->new = 1;
         $products->id_type = $request->input('loai');
         $products->id_color = $request->input('mausac');
@@ -114,10 +109,6 @@ class AdminController extends Controller
         if($request->file('hinhanh')!=null){
             $products->image=$fileName;
         }
-        // $products->image=$request->file('hinhanh');
-        // $file_name=$request->file('hinhanh')->getClientOriginalName();
-        // $products->image="public/Image/Product/".$file_name;
-        // $request->file('hinhanh')->move('public/Image/Product/',$file_name);
         $products->new = 1;
         $products->id_type = $request->input('loai');
         $products->id_color = $request->input('mausac');

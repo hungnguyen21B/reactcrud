@@ -11,7 +11,7 @@
       <script src='https://kit.fontawesome.com/a076d05399.js'></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <link rel="stylesheet" href="public/css/adminPage.css">
+      <link rel="stylesheet" href="{{asset('css/adminPage.css')}}">
       <script src='Chart.min.js'></script>
   </head>
 
@@ -64,12 +64,12 @@
                     <table class="table table-bordered table table-hover">
                       <thead>
                         <tr>
-                          <th>Tên sản phẩm</th>
-                          <th>Hình ảnh</th>
-                          <th>Mô tả</th>
-                          <th>Giá</th>
-                          <th>Màu sắc</th>
-                          <th>Kiểu dáng</th>
+                          <th>Product name</th>
+                          <th>Image</th>
+                          <th>Description</th>
+                          <th>Price</th>
+                          <th>Color</th>
+                          <th>Type</th>
                           <th>Edit</th>
                           <th>Delete</th>
                         </tr>

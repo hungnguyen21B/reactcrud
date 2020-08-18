@@ -5,66 +5,87 @@
 <br>
 <div class="container">
     <div class="card shopping-cart">
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+            @endforeach
+        </div>
         <div class="card-header bg-dark text-light">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            Shipping cart
+            Products
             <a href="" class="btn btn-outline-info btn-sm pull-right">Continue shopping</a>
             <div class="clearfix"></div>
         </div>
         <div class="card-body">
             <!-- PRODUCT -->
-        
-            @foreach($products as $product)
+            @for($i=0;$i<count($products);$i++)
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-2 text-center">
-                    <img class="img-responsive" src='{{asset("Image/Product/".$product->image)}}' alt="prewiew" style='width:120px; height:80px' width="120" height="80">
+                    <img class="img-responsive" src='{{asset("Image/Product/".$products[$i]->image)}}' alt="prewiew" style='width:120px; height:80px' width="120" height="80">
                 </div>
                 <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                    <h4 class="product-name"><strong>{{$product->name}}</strong></h4>
+                    <h4 class="product-name"><strong>{{$products[$i]->name}}</strong></h4>
                     <h4>
-                        <small>{{$product->description}}</small>
+                        <small>{{$products[$i]->description}}</small>
                     </h4>
                 </div>
                 <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
                     <div>
-                        <select name="cars" id="cars" class="btn btn-mini">
+                        <form action="{{ route('saveSizeRental',$products[$i]->id) }}" method="post"> 
+                            @csrf
+                        <select name="sizes" id="cars" class="btn btn-mini" onchange="saveRemind()">
                         @foreach($sizes as $sizess)
-                            @if( $sizess[0]->id_pro==$product->id)
+                            @if($sizess)
+                            @if($sizess[0]->id_pro==$products[$i]->id)
                                 @foreach($sizess as $size)
-                                <option value="{{$size->id_size}}">{{$size->name}}</option>
+                                    @if($carts[$i]->id_size == $size->id_size)
+                                    <option value="{{$size->id_size}}" selected>{{$size->name}}</option>
+                                    @else
+                                    <option value="{{$size->id_size}}">{{$size->name}}</option>
+                                    @endif
                                 @endforeach
+                            @endif
                             @endif
                         @endforeach                    
                         </select>
+                        <select name="days" id="cars" class="btn btn-mini" onchange="saveRemind()">
+                        @for($j = 2; $j < 8; $j=$j+2)
+                            @if($j == $carts[$i]->rental_time)
+                            <option value="{{$j}}" selected>{{$j}} days</option>
+                            @else
+                            <option value="{{$j}}">{{$j}} days</option>
+                            @endif
+                        @endfor
+                        </select>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i></button>
+                    </form>
                     </div>
                     <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                        <h6><strong>{{$product->promotion_price==0?number_format($product->unit_price):number_format($product->promotion_price)}}(vnd) <span class="text-muted">x</span></strong></h6>
+                        <h6><strong>{{$products[$i]->promotion_price==0?number_format($products[$i]->unit_price):number_format($products[$i]->promotion_price)}}(vnd) <span class="text-muted">x</span></strong></h6>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4">
                         <div class="quantity">
-                            <!-- <input type="text" id="price{{$product->id}}" value="{{$product->promotion_price==0?($product->unit_price):($product->promotion_price)}}" hidden>
-                            <input type="button" value="+" class="plus" id="plus" onclick="addQty({{$product->id}})">
+                            <a href="{{route('addQuantity',$products[$i]->id)}}"><input type="button" value="+" class="plus btn btn-info" id="plus"></a>
                             <input type="number" style="-webkit-appearance: none;
                                                         " step="1" max="99" min="1" 
-                                                        value="{{$product->quantity}}" title="Qty" id="{{$product->id}}" class="qty" size="4">
-                            <input type="button" value="-" class="minus" id="minuss" onclick="minusQty({{$product->id}})"> -->
-                        
-                            <a href="{{route('addQuantity',$product->id)}}"><input type="button" value="+" class="plus" id="plus"></a>
-                            <input type="number" style="-webkit-appearance: none;
-                                                        " step="1" max="99" min="1" 
-                                                        value="{{$product->quantity}}" title="Qty" id="{{$product->id}}" class="qty" size="4">
-                           <a href="{{route('minusQuantity',$product->id)}}"><input type="button" value="-" class="minus" id="minuss" ></a>
+                                                        value="{{$products[$i]->quantity}}" title="Qty" id="{{$products[$i]->id}}" class="qty" size="4" readonly>
+                           <a href="{{route('minusQuantity',$products[$i]->id)}}"><input type="button" value="-" class="minus btn btn-primary" id="minus" ></a>
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 text-right">
+                    <a href="{{route('removeCart',$products[$i]->id)}}">
                         <button type="button" class="btn btn-outline-danger btn-xs">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
+                    </a>
                     </div>
                 </div>
             </div>
             <hr>
-            @endforeach
+            @endfor
             <!-- END PRODUCT -->
             <!-- PRODUCT -->
             <!-- checkout -->
@@ -78,6 +99,10 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Email</label>
                     <input type="email" class="form-control" id="exampleInputPassword1"name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="fn">Phone number</label>
+                    <input type="text" class="form-control" id="fn"name="phone" placeholder="Phone">
                 </div>
                 <div class="form-group">
                     <label for="add">Address</label>
@@ -125,7 +150,6 @@
             <div class="pull-right" style="margin: 10px">
                 <button type="button" class="btn btn-success pull-right" id="checkout-btn" onclick="showCheckout()">Checkout</button>
                 <div class="pull-right" style="margin: 5px">
-                <!-- <input type="text" value="{{$totalPrice}}"id="totalPrice" hidden> -->
                     Total price: <b><span id="displayTotalPrice">{{ number_format($totalPrice)}}</span>(vnd)</b>
                 </div>
             </div>
@@ -133,5 +157,6 @@
     </div>
 </div>
 <br>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="{{asset('/javaScript/cart.js')}}"></script>
 @endsection
