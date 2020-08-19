@@ -7,6 +7,7 @@ use App\Bill;
 use App\BillDetail;
 use App\Color;
 use App\Customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,7 +24,7 @@ class AdminController extends Controller
         return view('PageAdmin.orderManagement',compact('order','customers'));
     }
     public function getDailyChart(Request $req){
-        $date='2020-02-06';
+        $date=Carbon::now();
         $product = Product::all();
         $order = Bill::all();
         $orderDetails=BillDetail::all(); 

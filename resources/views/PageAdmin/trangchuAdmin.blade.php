@@ -19,7 +19,7 @@
       <nav class="navbar navbar-inverse">
               <div class="navbar-header">       
                   <a class="navbar-brand" href="#">
-                    <img src="public/Image/logo2.png" alt="" height="40" width="80" />
+                  <img src="{{asset('Image/logo2.png')}}" alt="" height="40" width="80" />
                   </a>
                   <a class="navbar-brand" href="#">HUNG HOA MAI</a>
               </div>

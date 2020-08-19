@@ -11,7 +11,7 @@
 <style>
    body{
         
-        background-image: url(./public/Image/background.jpg);
+        background-image: url("{{asset('Image/background.jpg')}}");
         background-size: cover;
     }
     .container{
@@ -24,7 +24,7 @@
     right: 0;
     bottom: 50;
     margin: auto;
-    background-image: url(./public/Image/background1.jpg);
+    background-image: url("{{asset('Image/background1.jpg')}}");
     background-size: cover;
     margin-top: 100px;
     font-weight: bold;

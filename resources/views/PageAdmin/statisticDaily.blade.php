@@ -19,14 +19,14 @@
       <nav class="navbar navbar-inverse">
               <div class="navbar-header">       
                   <a class="navbar-brand" href="#">
-                    <img src="public/Image/logo2.png" alt="" height="40" width="80" />
+                    <img src="{{asset('Image/logo2.png')}}" alt="" height="40" width="80" />
                   </a>
                   <a class="navbar-brand" href="#">HUNG HOA MAI</a>
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
                   <ul class="nav navbar-nav navbar-right">
                       <li><a href="#">Admin</a></li>
-                      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                      <li><a href="{{route('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                   </ul>
               </div>       
       </nav>

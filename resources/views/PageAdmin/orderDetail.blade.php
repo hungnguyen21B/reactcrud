@@ -24,7 +24,7 @@
     right: 0;
     bottom: 50;
     margin: auto;
-    background-image: url(./public/Image/background1.jpg);
+    background-image: url("{{asset('Image/background1.jpg')}}");
     background: linear-gradient(to right,#87CEFA, #FFB6C1);
     background-color:white;
     background-size: cover;
