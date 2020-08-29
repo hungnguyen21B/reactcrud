@@ -107,7 +107,7 @@
                 @foreach ($new_products as $item)
                 <div class="col-sm-4">
                     <div class="hovereffect">
-                        <img class="img-responsive" src="Image/Product/{{$item->image}}" alt="">
+                        <img class="img-responsive" src="Image/Product/{{$item->image}}" alt="" style="width:90%">
                         <div class="overlay">
                             <h2>{{$item->name}}</h2>
                             <a class="info" href="{{route('detail',$item->id)}}">Detail</a>
@@ -134,7 +134,7 @@
                             <div class="row">
                                 @for($i = 0; $i<3; $i++) <div class="col-sm-4">
                                     <div class="hovereffect">
-                                        <img class="img-responsive" src="Image/Product/{{$products[$i]->image}}" alt="">
+                                        <img class="img-responsive" src="Image/Product/{{$products[$i]->image}}" alt="" style="width:90%">
                                         <div class="overlay">
                                             <h2>{{$products[$i]->name}}{{$products[$i]->id}}</h2>
                                             <a class="info" href="{{route('detail',$products[$i]->id)}}">Detail</a>
@@ -159,7 +159,7 @@
                         <div class="row">
                             @for($i = $run1; $i<$run2; $i++) <div class="col-sm-4">
                                 <div class="hovereffect">
-                                    <img class="img-responsive" src="Image/Product/{{$products[$i]->image}}" alt="">
+                                    <img class="img-responsive" src="Image/Product/{{$products[$i]->image}}" alt="" style="width:90%">
                                     <div class="overlay">
                                         <h2>{{$products[$i]->name}}{{$products[$i]->id}}</h2>
                                         <a class="info" href="{{route('detail',$products[$i]->id)}}">Detail</a>

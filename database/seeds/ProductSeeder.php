@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'name'=>'Jaden',
-                'image'=>'1.jpg',
+                'image'=>'woman1.jpg',
                 'unit_price'=>'400000',
                 'promotion_price'=>'360000',
                 'description'=>'Mix traditional styling with fun detail with this beautiful A-line wedding dress that features a long lace illusion sleeves and a covered illusion button up back.s',
@@ -26,7 +26,29 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name'=>'Nina',
-                'image'=>'2.jpg',
+                'image'=>'woman2.jpg',
+                'unit_price'=>'650000',
+                'promotion_price'=>'600000',
+                'description'=>'An understated beauty, Nina offers classic bridal style with delicately embroidered lace finished with clear sequins for a soft bridal look.',
+                'quantity'=>56,
+                'id_type'=>1,
+                'id_color'=>1,
+                'new'=>1
+            ],
+            [
+                'name'=>'Jaden Man',
+                'image'=>'manad3.jpg',
+                'unit_price'=>'400000',
+                'promotion_price'=>'360000',
+                'description'=>'Mix traditional styling with fun detail with this beautiful A-line wedding dress that features a long lace illusion sleeves and a covered illusion button up back.s',
+                'quantity'=>30,
+                'id_type'=>7,
+                'id_color'=>2,
+                'new'=>1
+            ],
+            [
+                'name'=>'Nina',
+                'image'=>'woman2.jpg',
                 'unit_price'=>'650000',
                 'promotion_price'=>'600000',
                 'description'=>'An understated beauty, Nina offers classic bridal style with delicately embroidered lace finished with clear sequins for a soft bridal look.',
@@ -102,19 +124,19 @@ class ProductSeeder extends Seeder
                 'new'=>0
             ],
             [
-                'name'=>'Lennox',
-                'image'=>'9.jpg',
+                'name'=>'Lennox Man',
+                'image'=>'man9.jpg',
                 'unit_price'=>'550000',
                 'promotion_price'=>'500000',
                 'description'=>'We love this super playful dress design that’s overflowing with soft tulle and beautiful lace. This gown is embellished with ivory embroidery lace appliques that are scattered across the skirt creating a stunning texture.',
                 'quantity'=>345,
-                'id_type'=>2,
+                'id_type'=>6,
                 'id_color'=>2,
                 'new'=>1
             ],
             [
-                'name'=>'Darian',
-                'image'=>'10.jpg',
+                'name'=>'Darian Man',
+                'image'=>'man10.jpg',
                 'unit_price'=>'550000',
                 'promotion_price'=>'450000',
                 'description'=>'This gorgeous wedding dress style features a softly flowing skirt and a bodice embellished with plenty of sparkling beading. This bodice has the best of both worlds by combining an attractively low sweetheart neckline with a higher illusion boat neckline.',
@@ -122,6 +144,39 @@ class ProductSeeder extends Seeder
                 'id_type'=>2,
                 'id_color'=>3,
                 'new'=>0
+            ],
+            [
+                'name'=>'Ao Dai For Man',
+                'image'=>'manad4.jpg',
+                'unit_price'=>'640000',
+                'promotion_price'=>'600000',
+                'description'=>'The classic sweetheart bodice features a romantic lace overlay and three-quarter-length sleeves covered in beautiful appliqués. Take a closer peek and you’ll see the floral embroidered lace.',
+                'quantity'=>119,
+                'id_type'=>7,
+                'id_color'=>3,
+                'new'=>1
+            ],
+            [
+                'name'=>'Emery Man',
+                'image'=>'man3.jpg',
+                'unit_price'=>'410000',
+                'promotion_price'=>'380000',
+                'description'=>' We just love the effortless pleated bodice! Free-spirited brides will love the sweetheart neckline and floaty chiffon skirt.',
+                'quantity'=>74,
+                'id_type'=>6,
+                'id_color'=>2,
+                'new'=>0
+            ],
+            [
+                'name'=>'Holly Man',
+                'image'=>'man4.jpg',
+                'unit_price'=>'640000',
+                'promotion_price'=>'600000',
+                'description'=>'The classic sweetheart bodice features a romantic lace overlay and three-quarter-length sleeves covered in beautiful appliqués. Take a closer peek and you’ll see the floral embroidered lace.',
+                'quantity'=>119,
+                'id_type'=>6,
+                'id_color'=>3,
+                'new'=>1
             ],
             [
                 'name'=>'Shannon',
@@ -135,13 +190,13 @@ class ProductSeeder extends Seeder
                 'new'=>1
             ],
             [
-                'name'=>'Emery',
-                'image'=>'12.jpg',
+                'name'=>'Emery Ao Dai',
+                'image'=>'manad4.jpg',
                 'unit_price'=>'990000',
                 'promotion_price'=>'980000',
                 'description'=>'An elegant wedding dress, made from swathes of sumptuous satin, it’s striking from all angles. This design harks back to an era of old Hollywood glamour, and the v-shaped neckline and flattering pleated bodice are full of movie star magic.',
                 'quantity'=>98,
-                'id_type'=>2,
+                'id_type'=>7,
                 'id_color'=>2,
                 'new'=>0
             ],
@@ -197,6 +252,17 @@ class ProductSeeder extends Seeder
                 'description'=>'Feel every bit a bride in this wedding dress. Featuring a luxurious illusion bodice with a v-neckline, embellished with shimmering beading adding an extra touch of glitz to your bridal look.',
                 'quantity'=>94,
                 'id_type'=>4,
+                'id_color'=>1,
+                'new'=>1
+            ],
+            [
+                'name'=>'Liana Ao Dai',
+                'image'=>'manad4.jpg',
+                'unit_price'=>'450000',
+                'promotion_price'=>'420000',
+                'description'=>'Feel every bit a bride in this wedding dress. Featuring a luxurious illusion bodice with a v-neckline, embellished with shimmering beading adding an extra touch of glitz to your bridal look.',
+                'quantity'=>94,
+                'id_type'=>7,
                 'id_color'=>1,
                 'new'=>1
             ],
@@ -274,6 +340,28 @@ class ProductSeeder extends Seeder
                 'description'=>'The classic sweetheart bodice features a romantic lace overlay and three-quarter-length sleeves covered in beautiful appliqués. Take a closer peek and you’ll see the floral embroidered lace.',
                 'quantity'=>119,
                 'id_type'=>5,
+                'id_color'=>3,
+                'new'=>1
+            ],
+            [
+                'name'=>'Emery Man',
+                'image'=>'man3.jpg',
+                'unit_price'=>'410000',
+                'promotion_price'=>'380000',
+                'description'=>' We just love the effortless pleated bodice! Free-spirited brides will love the sweetheart neckline and floaty chiffon skirt.',
+                'quantity'=>74,
+                'id_type'=>6,
+                'id_color'=>2,
+                'new'=>0
+            ],
+            [
+                'name'=>'Holly Man',
+                'image'=>'man4.jpg',
+                'unit_price'=>'640000',
+                'promotion_price'=>'600000',
+                'description'=>'The classic sweetheart bodice features a romantic lace overlay and three-quarter-length sleeves covered in beautiful appliqués. Take a closer peek and you’ll see the floral embroidered lace.',
+                'quantity'=>119,
+                'id_type'=>6,
                 'id_color'=>3,
                 'new'=>1
             ],

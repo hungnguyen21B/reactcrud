@@ -34,14 +34,15 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'=>'Vui lÃ²ng nháº­p tÃªn',
-            'email.required'=>'Vui lÃ²ng nháº­p email',
-            'email.email'=>'KhÃ´ng Ä‘Ãºng Ä‘á»‹nh dáº¡ng email',
-            'email.unique'=>'Email Ä‘Ã£ cÃ³ ngÆ°á»i sá»­ dá»¥ng',
-            'password.required'=>'Vui lÃ²ng nháº­p máº­t kháº©u',
-            'password.min'=>'Máº­t kháº©u Ã­t nháº¥t 6 kÃ­ tá»±',
-            're_password.required'=>'Máº­t kháº©u khÃ´ng giá»‘ng nhau',
-            're_password.same'=>'Máº­t kháº©u khÃ´ng giá»‘ng nhau',
+            'name.required'=>'Something went wrong with name',
+            'email.unique'=>'Email have exist',
+            'email.required'=>'Something went wrong with email',
+            'email.email'=>'Something went wrong with email',
+            'password.required'=>'Password not valid',
+            'password.min'=>'Password not valid',
+            'password.max'=>'Password not valid',
+            're_password.required'=>'Not confirmed',
+            're_password.same'=>'Not confirmed',
         ];
     }
 }

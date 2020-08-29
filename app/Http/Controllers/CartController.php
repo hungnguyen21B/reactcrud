@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\EmailCheckout;
+use App\Http\Requests\OrderRequest;
 use App\Cart;
 use App\Color;
 use App\Size;
@@ -166,7 +167,7 @@ class CartController extends Controller
         }
         
     }
-    public function checkout(Request $Request)
+    public function checkout(OrderRequest $Request)
     {
         $carts = Session('cart') ? Session::get('cart') : [];
         $id_Cus = Session::get('login');

@@ -31,11 +31,11 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required'=>'Vui lÃ²ng nháº­p email',
-            'email.email'=>'Email khÃ´ng Ä‘Ãºng Ä‘á»‹nh dáº¡ng',
-            'password.required'=>'Vui lÃ²ng nháº­p máº­t kháº©u',
-            'password.min'=>'Máº­t kháº©u Ã­t nháº¥t 6 kÃ­ tá»±',
-            'password.max'=>'Máº­t kháº©u khÃ´ng quÃ¡ 20 kÃ­ tá»±'
+            'email.required'=>'Something went wrong with email',
+            'email.email'=>'Something went wrong with email',
+            'password.required'=>'Password not valid',
+            'password.min'=>'Password not valid',
+            'password.max'=>'Password not valid'
         ];
     }
 }

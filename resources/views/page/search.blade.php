@@ -100,7 +100,7 @@
                 @foreach ($products as $item)
                 <div class="col-sm-4">
                     <div class="hovereffect">
-                        <img class="img-responsive" src="Image/Product/{{$item->image}}" alt="">
+                        <img class="img-responsive" src="Image/Product/{{$item->image}}" alt="" style="width:90%">
                         <div class="overlay">
                             <h2>{{$item->name}}</h2>
                             <a class="info" href="{{route('detail',$item->id)}}">Detail</a>

@@ -19,7 +19,7 @@ class CreateBillsTable extends Migration
             $table->date('date');
             $table->double('total_price');
             $table->String('payment');
-            $table->String('note');
+            $table->String('note')->nullable(true);
             $table->timestamps();
         });
     }

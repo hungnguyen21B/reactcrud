@@ -1,10 +1,14 @@
 @extends('master')
 @section('content')
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+<link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 <br>
 <br>
 <div class="container">
     <div class="card shopping-cart">
+    <div>
+                        @include('error')
+                    </div>
         <div class="flash-message">
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
@@ -24,7 +28,7 @@
             @for($i=0;$i<count($products);$i++)
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-2 text-center">
-                    <img class="img-responsive" src='{{asset("Image/Product/".$products[$i]->image)}}' alt="prewiew" style='width:120px; height:80px' width="120" height="80">
+                    <img class="img-responsive" src='{{asset("Image/Product/".$products[$i]->image)}}' alt="prewiew" style='width:120px; height:90px' width="120" height="80">
                 </div>
                 <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                     <h4 class="product-name"><strong>{{$products[$i]->name}}</strong></h4>
@@ -61,23 +65,24 @@
                         @endfor
                         </select>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i></button>
-                    </form>
+                        </form>
+                    
                     </div>
                     <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
                         <h6><strong>{{$products[$i]->promotion_price==0?number_format($products[$i]->unit_price):number_format($products[$i]->promotion_price)}}(vnd) <span class="text-muted">x</span></strong></h6>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4">
-                        <div class="quantity">
-                            <a href="{{route('addQuantity',$products[$i]->id)}}"><input type="button" value="+" class="plus btn btn-info" id="plus"></a>
-                            <input type="number" style="-webkit-appearance: none;
-                                                        " step="1" max="99" min="1" 
-                                                        value="{{$products[$i]->quantity}}" title="Qty" id="{{$products[$i]->id}}" class="qty" size="4" readonly>
-                           <a href="{{route('minusQuantity',$products[$i]->id)}}"><input type="button" value="-" class="minus btn btn-primary" id="minus" ></a>
-                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 quantity">
+
+                            <div> <a href="{{route('addQuantity',$products[$i]->id)}}"><button class="btn btn-info btn-add" id="plus">+</button></a></div>
+                           <div><input type="number" style="-webkit-appearance: none;" step="1" max="99" min="1" 
+                           value="{{$products[$i]->quantity}}" title="Qty" id="{{$products[$i]->id}}" 
+                           class="qty" size="4" readonly class="qty"></div>
+                            <div><a href="{{route('minusQuantity',$products[$i]->id)}}"><button type="button"class="btn btn-success btn-minus" id="minus">-</button></a></div>
+                     
+                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 text-right">
                     <a href="{{route('removeCart',$products[$i]->id)}}">
-                        <button type="button" class="btn btn-outline-danger btn-xs">
+                        <button type="button" class="btn btn-outline-danger btn-xs btn-delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </a>
@@ -93,19 +98,19 @@
             <form action="{{route('checkout')}}" method="post" id="checkout-form" style="display:none">
             @csrf
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
+                    <label for="exampleInputEmail1">Name <span class="required">(*)</span></label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Name...">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputPassword1"name="email" placeholder="Email">
+                    <label for="exampleInputPassword1">Email <span class="required">(*)</span></label>
+                    <input type="email" class="form-control" id="exampleInputPassword1"name="email" placeholder="Email...">
                 </div>
                 <div class="form-group">
-                    <label for="fn">Phone number</label>
-                    <input type="text" class="form-control" id="fn"name="phone" placeholder="Phone">
+                    <label for="fn">Phone number <span class="required">(*)</span></label>
+                    <input type="text" class="form-control" id="fn"name="phone" placeholder="Phone...">
                 </div>
                 <div class="form-group">
-                    <label for="add">Address</label>
+                    <label for="add">Address <span class="required">(*)</span></label>
                     <input type="text" class="form-control" id="add" name="address" placeholder="Address...">
                 </div>
                 <div class="form-check">
@@ -120,8 +125,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="note">Notes</label>
-                    <textarea name="note" id="note" cols="120" rows="10"></textarea>
+                    <label for="note">Notes <span>(optional)</span></label>
+                    <textarea name="note" id="note" cols="110" rows="10"></textarea>
                 </div>
                 <div class="form-check">
                 <input class="form-check-input" type="radio" name="payment" id="exampleRadios1" value="ADD" checked>

@@ -19,11 +19,12 @@ class SlideSeeder extends Seeder
             ],
             [
                 'id'=>2,
-                'image'=>'banner2.jpg'
+                'image'=>'banner5.jpg'
             ],
             [
                 'id'=>3,
                 'image'=>'banner3.jpg'
-            ]]);
+            ],
+            ]);
     }
 }

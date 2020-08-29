@@ -27,6 +27,12 @@ class TypeSeeder extends Seeder
             ],
             [
                 'name'=>'Column'
+            ],
+            [
+                'name'=>'Man Vest'
+            ],
+            [
+                'name'=>'Ao Dai'
             ]
         ]);
     }
